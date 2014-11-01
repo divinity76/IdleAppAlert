@@ -11,6 +11,9 @@
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
+Minimal/
+NoOptimizeNoDebug/
+Release/
 x64/
 x86/
 build/
