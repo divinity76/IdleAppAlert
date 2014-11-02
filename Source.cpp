@@ -6,14 +6,17 @@
 #include <vector>
 #include <algorithm>    // std::min
 #include <assert.h>
-#if !defined(_WIN32)
-#error NOT PORTED TO THIS FKING OS YET.. (PS: using WinAPI all over the place :( )
-#endif
 
-
+#if defined(_WIN32)
 #define NOMINMAX
 #include <windows.h>
 #include <WinDef.h>
+#elif defined(X11)
+#error x11 todo..
+
+#else
+#error NOT PORTED TO THIS FKING OS YET.. (PS: using WinAPI all over the place :( )
+#endif
 #define TARGET_TITLE_MAX_LENGTH 0xFFFF //TODO: use GetWindowTextLength --and it seems bugged, sometimes returning a few bytes less than needed :s
 
 struct BitmapDif {
@@ -34,6 +37,7 @@ void getTarget(HWND* targetHWND, char* targetTitle){
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));//gotta be fast to avoid user moving over something else...
 		//and its still not fool-proof, there's *probably* a better, event-driven way to do this, buuuuuuut i don't know how. 
 	//maybe some kind of keyboard driver hook
+	// ... like http://msdn.microsoft.com/en-us/library/windows/desktop/ms644985(v=vs.85).aspx / LowLevelKeyboardProc callback :)
 	}
 	assert(GetPhysicalCursorPos(&pt)!=false);
 	(*targetHWND) = WindowFromPoint(pt);
