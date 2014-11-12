@@ -173,7 +173,7 @@ int main()
 		newimage = captureImage2(&targetHWND);
 		compareBitmaps2(oldimage, newimage, &diff);
 		std::cout << "(diff.bytesDifferent: " << diff.bytesDifferent << " diff.image1Size: " << diff.image1Size + 1 << " diff.image2Size: " << diff.image2Size << "  diff.percentageDif: " << diff.percentageDif /*static_cast<const int>(diff.percentageDif)*/ << ")"<< std::endl;
-		if (diff.percentageDif < threshold)
+		if (diff.percentageDif <= threshold)
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);//<<red text..
 			beepnow = true;
